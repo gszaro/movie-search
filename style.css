@@ -36,3 +36,13 @@ button {
   border-radius: 4px;
   margin-bottom: 10px;
 }
+
+#loading-spinner {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #58a6ff;
+}
+
+.hidden {
+  display: none;
+}

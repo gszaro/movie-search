@@ -35,3 +35,31 @@ function displayMovie(movie) {
     </div>
   `;
 }
+
+const loadingSpinner = document.getElementById("loading-spinner");
+
+searchBtn.addEventListener("click", () => {
+  const title = movieInput.value.trim();
+  if (title) {
+    getMovie(title);
+  }
+});
+
+async function getMovie(title) {
+  loadingSpinner.classList.remove("hidden"); // Show spinner
+  movieInfo.innerHTML = ""; // Clear previous content
+
+  try {
+    const response = await fetch(`${apiKey}${title}`);
+    const data = await response.json();
+    if (data.Response === "False") {
+      movieInfo.innerHTML = `<p>Movie not found. Try again!</p>`;
+      return;
+    }
+    displayMovie(data);
+  } catch (error) {
+    movieInfo.innerHTML = `<p>Error fetching movie data.</p>`;
+  } finally {
+    loadingSpinner.classList.add("hidden"); // Hide spinner
+  }
+}
